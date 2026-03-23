@@ -1,6 +1,6 @@
 ﻿namespace albums_api.Models
 {
-    public record Album(int Id, string Title, string Artist, double Price, string Image_url)
+    public record Album(int Id, string Title, string Artist, int year, double Price, string Image_url)
     {
         public static List<Album> GetAll()
         {
