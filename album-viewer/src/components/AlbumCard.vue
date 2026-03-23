@@ -21,20 +21,30 @@
     </div>
     
     <div class="album-actions">
-      <button class="btn btn-primary">Add to Cart</button>
+      <button class="btn btn-primary" @click="handleAddToCart">{{ addedFeedback ? 'Added ✓' : 'Add to Cart' }}</button>
       <button class="btn btn-secondary">Preview</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { Album } from '../types/album'
+import { useCart } from '../composables/useCart'
 
 interface Props {
   album: Album
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+const { addToCart } = useCart()
+const addedFeedback = ref(false)
+
+const handleAddToCart = (): void => {
+  addToCart(props.album)
+  addedFeedback.value = true
+  setTimeout(() => { addedFeedback.value = false }, 1000)
+}
 
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
