@@ -18,6 +18,10 @@ jobs:
     name: Set Environment Variables
     runs-on: ubuntu-latest
     outputs:
+      # This line references the 'version' output variable from a previous step named 'main'
+      # The syntax ${{ steps.main.outputs.version }} retrieves the output value that was set
+      # in the 'main' step and makes it available for use in the current workflow step
+      # This is commonly used to pass data between different steps in a GitHub Actions workflow
       version: ${{ steps.main.outputs.version }}
       created: ${{ steps.main.outputs.created }}
       repository: ${{ steps.main.outputs.repository }}

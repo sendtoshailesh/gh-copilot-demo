@@ -25,8 +25,14 @@ namespace albums_api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok();
-        }
+            // function that retrieves albums and sorts them by title, artist or price
+            var album = Album.GetById(id);
+            if (album == null)
+            {
+                return NotFound();
+            }
+            return Ok(album);
+        }       
 
-    }
+    
 }
